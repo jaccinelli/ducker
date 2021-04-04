@@ -4,7 +4,7 @@ import asyncio
 def open_shell_interpreter(conn):
 	cmd = ""
 	while True:
-		cmd = raw_input(">")
+		cmd = input(">")
 		if cmd == "exit":
 			conn.send(cmd.encode())
 			break
